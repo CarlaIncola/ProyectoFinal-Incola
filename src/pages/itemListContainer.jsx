@@ -1,6 +1,7 @@
 import products from '../data/products';
 import { useCart } from '../components/cartWidget/useCart';
 import styles from "./itemListContainer.module.scss";
+import ProductCard from '../components/productCard/productCard';
 
 const ProductsPage = () => {
     
@@ -9,7 +10,7 @@ const ProductsPage = () => {
     return (
         <div className={styles.productsgrid}>
         {products.map(product => (
-            <div key={product.id} className="product-card">
+            <div key={product.id} className={ProductCard}>
             <img 
                 src={product.image} 
                 alt={product.name} 
