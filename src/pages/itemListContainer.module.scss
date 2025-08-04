@@ -1,7 +1,12 @@
+@use '../styles/variables' as *;
+
 .productsgrid {
     display: flex;
-    justify-content: space-between;
-    background-color: aquamarine;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+    background-color: $main--white;
+    color: $main--black;
     padding: 40px;
     border-radius: 8px;
 }

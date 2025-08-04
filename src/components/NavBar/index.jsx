@@ -17,7 +17,7 @@ const NavBar = ({ logoText = "Logo", navLinks = [] }) => {
                 }}>
                 {navLinks.map((link, index) => (
                 <li key={index}>
-                    <a href={link.path} style={{ color: "white" }}>
+                    <a href={link.path} className={styles.links}>
                     {link.name}
                     </a>
                 </li>

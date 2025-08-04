@@ -1,6 +1,6 @@
 {
   "name": "ecommerce",
-  "homepage": "https://carlaincola.github.io/CreaTuLanding-Incola/",
+  "homepage": "https://carlaincola.github.io/CreaTuLanding-Incola",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -15,9 +15,9 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "rm -rf build && npm run build && gh-pages -d build -b main -r https://github.com/carlaincola/CreaTuLanding-Incola.git",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "GENERATE_SOURCEMAP=false PUBLIC_URL=https://carlaincola.github.io/CreaTuLanding-Incola react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

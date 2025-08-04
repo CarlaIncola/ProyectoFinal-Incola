@@ -10,7 +10,7 @@ const ProductsPage = () => {
     return (
         <div className={styles.productsgrid}>
         {products.map(product => (
-            <div key={product.id} className={ProductCard}>
+            <div key={product.id} className="product-card">
             <img 
                 src={product.image} 
                 alt={product.name} 
@@ -30,6 +30,7 @@ const ProductsPage = () => {
             >
                 Add to Cart
             </button>
+            
             </div>
         ))}
         </div>
