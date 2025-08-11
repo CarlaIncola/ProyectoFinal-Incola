@@ -26,10 +26,11 @@ const NavBar = ({ logoText = "Logo", navLinks = [] }) => {
 
             <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
                 <button 
+                    className={styles.hamburger}
                     onClick={toggleMenu}
-                    style={{ background: "none", border: "none", color: "white" }}
+                    style={{ background: "none", border: "none" }}
                     >
-                    ☰
+                    <i class="fa-solid fa-bars"></i>
                 </button>
                 <CartWidget />
             </div>

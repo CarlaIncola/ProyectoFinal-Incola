@@ -1,0 +1,7 @@
+@use '../styles/variables' as *;
+
+html {
+    top: 0;
+    left: 0;
+    background-color: $main--white;
+}

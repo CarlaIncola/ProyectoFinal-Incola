@@ -19,7 +19,7 @@ const CartWidget = () => {
                 fontSize: '1.5rem'
                 }}
             >
-                🛒
+                <i class="fa-solid fa-cart-shopping"></i>
                 {totalItems > 0 && (
                     <span style={{
                         position: 'absolute',

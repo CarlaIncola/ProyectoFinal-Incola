@@ -9,9 +9,9 @@ import HeroBanner from './components/heroBanner';
 function App() {
   
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Contact", path: "/contact" },
+    { name: "Link 1", path: "/" },
+    { name: "Link 2", path: "/about" },
+    { name: "Link 3", path: "/contact" },
   ];
 
   return (
@@ -19,7 +19,7 @@ function App() {
 
     <div className="App">
 
-      <NavBar logoText="MyApp" navLinks={navLinks} />
+      <NavBar logoText="App Logo" navLinks={navLinks} />
       <HeroBanner />
       <Counter />
       <ProductsPage />
