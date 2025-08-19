@@ -1,9 +1,10 @@
 import Button from './components/Button'
 import Counter from './components/counter';
-import TextField from './components/textField';
 import NavBar from "./components/NavBar";
-import ProductsPage from "./pages/itemListContainer"
+import ItemListContainer from "./pages/ItemListContainer";
 import HeroBanner from './components/heroBanner';
+import ProductList from './components/SearchBar/ProductList';
+import products from './data/products';
 
 
 function App() {
@@ -21,8 +22,8 @@ function App() {
 
       <NavBar logoText="App Logo" navLinks={navLinks} />
       <HeroBanner />
-      <Counter />
-      <ProductsPage />
+      <ProductList products={products} />
+      <ItemListContainer greetingMessage="Welcome to our store!" />
 
     </div>
   );

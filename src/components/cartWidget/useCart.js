@@ -1,33 +1,64 @@
 // src/components/cartWidget/useCart.js
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+// Singleton cart state
+let globalCart = [];
+let listeners = [];
+
+const notifyListeners = () => {
+  listeners.forEach(listener => listener([...globalCart]));
+};
 
 export const useCart = () => {
-    const [cartItems, setCartItems] = useState([]);
-
-    const addToCart = (item) => {
-            setCartItems(prevItems => {
-            const existingItem = prevItems.find(i => i.id === item.id);
-            
-            if (existingItem) {
-                return prevItems.map(i => 
-                i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
-                );
-            }
-
-            return [...prevItems, { ...item, quantity: 1 }];
-            });
+  const [cart, setCart] = useState([...globalCart]);
+  
+  useEffect(() => {
+    // Subscribe to changes
+    const listener = (newCart) => setCart([...newCart]);
+    listeners.push(listener);
+    
+    // Initial sync
+    setCart([...globalCart]);
+    
+    return () => {
+      listeners = listeners.filter(l => l !== listener);
     };
+  }, []);
 
-    const removeFromCart = (itemId) => {
-        setCartItems(prevItems => prevItems.filter(item => item.id !== itemId));
-    };
+  const addToCart = (item) => {
+    // Validate item structure
+    if (!item.id || !item.quantity) {
+      console.error('Invalid item added to cart:', item);
+      return;
+    }
 
-    const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+    const existingIndex = globalCart.findIndex(i => i.id === item.id);
+    
+    if (existingIndex >= 0) {
+        // Replace instead of sum
+        globalCart[existingIndex] = { 
+          ...globalCart[existingIndex], 
+          quantity: item.quantity 
+        };
+      } else {
+        globalCart.push({ ...item });
+      }
+    
+    notifyListeners();
+    console.log('Cart updated:', [...globalCart]);
+  };
 
-    return {
-        cartItems,
-        addToCart,
-        removeFromCart,
-        totalItems
-    };
+  const removeFromCart = (itemId) => {
+    globalCart = globalCart.filter(item => item.id !== itemId);
+    notifyListeners();
+  };
+
+  const totalItems = globalCart.reduce((sum, item) => sum + item.quantity, 0);
+
+  return {
+    cartItems: [...cart], // Always return a new array
+    addToCart,
+    removeFromCart,
+    totalItems
+  };
 };

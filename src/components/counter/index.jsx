@@ -1,22 +1,19 @@
 import Button from "../Button"
 import TextField from "../textField"
-import useCounter from "./useCounter"
 
-const Counter = () => {
-
-    const {num, resta, suma} = useCounter()
-
+const Counter = ({ quantity, onIncrement, onDecrement, onChange }) => {
     return (
-
         <>
-            <Button text="-" onClick={resta} />
+            <Button text="-" onClick={onDecrement} />
             <TextField 
                 name="counter-input" 
                 type="text" 
                 id="input-counter" 
                 label="Counter" 
-                value={num} />
-            <Button text="+" onClick={suma} />
+                value={quantity}
+                onChange={(e) => onChange(e.target.value)}
+            />
+            <Button text="+" onClick={onIncrement} />
         </>
     )
 }

@@ -30,7 +30,7 @@ const NavBar = ({ logoText = "Logo", navLinks = [] }) => {
                     onClick={toggleMenu}
                     style={{ background: "none", border: "none" }}
                     >
-                    <i class="fa-solid fa-bars"></i>
+                    <i className="fa-solid fa-bars"></i>
                 </button>
                 <CartWidget />
             </div>

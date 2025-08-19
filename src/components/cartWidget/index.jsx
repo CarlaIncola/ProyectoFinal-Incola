@@ -6,6 +6,9 @@ const CartWidget = () => {
     const [isOpen, setIsOpen] = useState(false);
     const { cartItems, totalItems } = useCart();
 
+    console.log('Current cart:', cartItems); // Debug
+
+
     return (
         <div className="cart-widget" style={{ position: 'relative' }}>
                 {/* Cart Icon with Badge will go here when I define it */}
@@ -19,7 +22,7 @@ const CartWidget = () => {
                 fontSize: '1.5rem'
                 }}
             >
-                <i class="fa-solid fa-cart-shopping"></i>
+                <i className="fa-solid fa-cart-shopping"></i>
                 {totalItems > 0 && (
                     <span style={{
                         position: 'absolute',
