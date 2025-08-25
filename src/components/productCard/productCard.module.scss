@@ -2,13 +2,14 @@
 
 .productcard {
     background-color: $main--white;
-    border: 1px solid $main--black;
+    
+    border-radius: 8px;
 
     .addToCartBtn {
         margin-top: 10px;
         width: 100%;
         padding: 8px;
-        background: #2a6f97;
+        background: $main--red;
         color: white;
         border: none;
         border-radius: 4px;
@@ -16,10 +17,15 @@
         transition: background 0.2s;
         
         &:hover {
-            background: #1d4e6f;
+            background: $secondary--red;
         }
+    }
 }
-}
-.product {
-    color: red;
+
+.productimage {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 8px 8px 0px 0px;
 }

@@ -1,71 +1,50 @@
 @use '../../styles/variables' as *;
 
 .navbar {
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 2rem;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  .logo img {
+    height: 20px;
+  }
+
+  .categories {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: $main--white;
-    color: $main--black;
-  }
-  
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .navLinks {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-  }
-  
-  .link {
-    color: $main--black;
-    text-decoration: none;
-    transition: opacity 0.3s;
-  }
-  
-  .link:hover {
-    opacity: 0.8;
-  }
-  
-  /* Mobile Menu */
-  .menuButton {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .bar {
-    display: block;
-    width: 25px;
-    height: 3px;
-    margin: 5px auto;
-    background-color: $main--black;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .navLinks {
-      position: fixed;
-      top: 70px;
-      left: -100%;
-      flex-direction: column;
-      width: 100%;
-      text-align: center;
-      transition: 0.3s;
-      background-color: #333;
-      padding: 1rem 0;
     gap: 1rem;
+    
+
+    button {
+      background: none;
+      border: none;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 0.5rem 0.8rem;
+      border-radius: 4px;
+      transition: background 0.2s;
+
+      &:hover {
+        background-color: #f0f0f0;
+      }
     }
-  
-    .navLinks.active {
-      left: 0;
-    }
-  
-    .menuButton {
-      display: block;
+
+    .active {
+      text-decoration: underline;
+      color: $main--red;
+      font-weight: 700;
     }
   }
+}
+
+a {
+  color: $main--black;
+  text-decoration: none;
+}

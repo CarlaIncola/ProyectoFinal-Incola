@@ -1,4 +1,3 @@
-// src/components/TextField/index.jsx
 import React from 'react';
 import styles from "./textField.module.scss";
 
@@ -8,7 +7,7 @@ const TextField = ({
   id, 
   label, 
   value, 
-  onChange = () => {}, // Default empty function
+  onChange = () => {},
   readOnly = false,
   ...props 
 }) => {

@@ -1,58 +1,25 @@
-import React, { useState } from 'react';
-import { useCart } from '../cartWidget/useCart';
-import styles from "./productCard.module.scss";
-import Counter from '../counter';
+import { useContext, useState } from "react";
+import { CartContext } from "../../context/CartContext";
+import Counter from "../Counter";
 
 const ProductCard = ({ product }) => {
-  const { cartItems, addToCart, removeFromCart } = useCart();
+  const { addToCart } = useContext(CartContext);
   const [quantity, setQuantity] = useState(1);
 
-  const handleAddToCart = () => {
-    const qtyToAdd = Math.max(1, Number(quantity) || 1);
-    addToCart({
-      ...product,
-      quantity: qtyToAdd
-    });
-  };
-
-  const handleRemoveFromCart = () => {
-    removeFromCart(product.id);
-  };
-
-  // Check if this product is already in cart
-  const isInCart = cartItems.some(item => item.id === product.id);
-
   return (
-    <div className={styles.productcard}>
-      <img src={product.image} alt={product.name} />
+    <div>
       <h3>{product.name}</h3>
+      <img src={product.image} alt={product.name} />
       <p>${product.price}</p>
 
-      <Counter 
+      <Counter
         quantity={quantity}
-        onIncrement={() => setQuantity(prev => prev + 1)}
-        onDecrement={() => setQuantity(prev => Math.max(1, prev - 1))}
-        onChange={(newValue) => {
-          const validatedQty = Math.max(1, Number(newValue) || 1);
-          setQuantity(validatedQty);
-        }}
+        onIncrement={() => setQuantity(q => q + 1)}
+        onDecrement={() => setQuantity(q => Math.max(q - 1, 1))}
+        onChange={val => setQuantity(Number(val))}
       />
-      
-      <button 
-        onClick={handleAddToCart}
-        className={styles.addToCartBtn}
-      >
-        Add to Cart ({quantity})
-      </button>
 
-      {isInCart && (
-        <button 
-          onClick={handleRemoveFromCart}
-          className={styles.removeBtn}
-        >
-          <i class="fa-solid fa-trash-can"></i>
-        </button>
-      )}
+      <button onClick={() => addToCart(product, quantity)}>Add to Cart</button>
     </div>
   );
 };

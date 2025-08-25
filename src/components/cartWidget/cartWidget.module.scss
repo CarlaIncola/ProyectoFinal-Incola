@@ -1,0 +1,78 @@
+@use '../../styles/variables' as *;
+@use '../../styles/base' as *;
+
+.cartContainer {
+        position: relative;
+        display: inline-block;
+}
+  
+.cartButton {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #333;
+    position: relative;
+
+    &:hover {
+        color: $main--white;
+        background-color: $main--red;
+    }
+}
+
+.cartCount {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: $main--red;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.cartDropdown {
+    position: absolute;
+    top: 120%;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 220px;
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10;
+
+    p {
+        font-size: 0.9rem;
+        color: #666;
+        margin: 0;
+        text-align: center;
+        padding: 10px 0;
+    }
+}
+
+.cartItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #eee;
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    span:first-child {
+        font-weight: 500;
+        color: #333;
+    }
+
+    span:last-child {
+        font-size: 0.85rem;
+        color: #555;
+    }
+}

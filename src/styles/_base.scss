@@ -1,4 +1,9 @@
 @use '../styles/variables' as *;
+@import url('https://fonts.googleapis.com/css2?family=Afacad&display=swap');
+
+body {
+    font-family: 'Afacad', sans-serif;
+}
 
 html {
     top: 0;

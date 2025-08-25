@@ -1,7 +1,5 @@
-// src/components/cartWidget/useCart.js
 import { useState, useEffect } from 'react';
 
-// Singleton cart state
 let globalCart = [];
 let listeners = [];
 
@@ -13,11 +11,10 @@ export const useCart = () => {
   const [cart, setCart] = useState([...globalCart]);
   
   useEffect(() => {
-    // Subscribe to changes
+
     const listener = (newCart) => setCart([...newCart]);
     listeners.push(listener);
     
-    // Initial sync
     setCart([...globalCart]);
     
     return () => {
@@ -26,7 +23,7 @@ export const useCart = () => {
   }, []);
 
   const addToCart = (item) => {
-    // Validate item structure
+
     if (!item.id || !item.quantity) {
       console.error('Invalid item added to cart:', item);
       return;
@@ -35,7 +32,7 @@ export const useCart = () => {
     const existingIndex = globalCart.findIndex(i => i.id === item.id);
     
     if (existingIndex >= 0) {
-        // Replace instead of sum
+
         globalCart[existingIndex] = { 
           ...globalCart[existingIndex], 
           quantity: item.quantity 
@@ -56,7 +53,7 @@ export const useCart = () => {
   const totalItems = globalCart.reduce((sum, item) => sum + item.quantity, 0);
 
   return {
-    cartItems: [...cart], // Always return a new array
+    cartItems: [...cart],
     addToCart,
     removeFromCart,
     totalItems

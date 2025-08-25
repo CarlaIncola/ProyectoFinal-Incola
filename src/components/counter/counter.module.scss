@@ -1,0 +1,38 @@
+@use '../../styles/variables' as *;
+@use '../../styles/base' as *;
+
+.counterContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+}
+
+Button  {
+    
+    width: 24px;
+    height: 24px;
+    border: 1px solid $main--red;
+    border-radius: 100%;
+    background-color: $main--white;
+    color: $main--red;
+    font-size: 1rem;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $secondary--red;
+    }
+}
+
+Input {
+    width: 60px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 8px;
+    font-size: 1rem;
+}
+
+.counterText {
+    color: red;
+}

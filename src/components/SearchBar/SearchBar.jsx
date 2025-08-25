@@ -6,7 +6,7 @@ const SearchBar = ({ searchTerm, onSearchChange }) => {
   return (
     <div className={styles.searchSection}>
         
-            <i className="fa-solid fa-magnifying-glass"></i>
+        <i className="fa-solid fa-magnifying-glass"></i>
         
         <input
         type="text"
@@ -15,6 +15,7 @@ const SearchBar = ({ searchTerm, onSearchChange }) => {
         value={searchTerm}
         onChange={(e) => onSearchChange(e.target.value)}
         />
+        
     </div>
   );
 };

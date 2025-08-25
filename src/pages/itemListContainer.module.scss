@@ -1,21 +1,21 @@
 @use '../styles/variables' as *;
+@use '../styles/base' as *;
 
-.productsgrid {
-    display: flex;
+.itemsListContainer {
+    display: grid;
+    grid-template-columns: repeat(1, 6fr);
     flex-wrap: wrap;
     justify-content: space-around;
     gap: 20px;
     background-color: $main--white;
     color: $main--black;
-    padding: 40px;
-    border-radius: 8px;
+    padding-top: 40px;
 }
 
 
 
 .greeting {
-    /* Temporary debug styles */
-    color: red !important;
+    text-align: center;
     font-size: 24px !important;
-    background: yellow !important;
 }
+

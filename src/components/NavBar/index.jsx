@@ -1,41 +1,45 @@
-import useNav from "./useNav";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import CartWidget from "../cartWidget";
 import styles from "./navBar.module.scss";
 
-const NavBar = ({ logoText = "Logo", navLinks = [] }) => {
-    const { isMenuOpen, toggleMenu } = useNav();
+const NavBar = ({ logoImg, products }) => {
+    const [selectedCategory, setSelectedCategory] = useState("all");
+    const navigate = useNavigate();
+
+    const categories = ["all", ...new Set(products.flatMap(p => p.category))];
+
+    const handleCategoryClick = (category) => {
+        setSelectedCategory(category);
+        if (category === "all") {
+        navigate("/");
+        } else {
+        navigate(`/category/${category}`);
+        }
+    };
 
     return (
         <nav className={styles.navbar}>
-            
-            <div style={{ fontSize: "1.5rem" }}>{logoText}</div>
-
-            <ul style={{
-                display: isMenuOpen ? "flex" : "none",
-                listStyle: "none",
-                gap: "1rem",
-                }}>
-                {navLinks.map((link, index) => (
-                <li key={index}>
-                    <a href={link.path} className={styles.links}>
-                    {link.name}
-                    </a>
-                </li>
-                ))}
-            </ul>
-
-            <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
-                <button 
-                    className={styles.hamburger}
-                    onClick={toggleMenu}
-                    style={{ background: "none", border: "none" }}
-                    >
-                    <i className="fa-solid fa-bars"></i>
-                </button>
-                <CartWidget />
+            <div className={styles.logo}>
+                <img src={logoImg} alt="Logo" />
             </div>
+
+            <div className={styles.categories}>
+                {categories.map((cat, index) => (
+                <Link 
+                key={index} 
+                to={cat === "all" ? "/" : `/category/${cat}`} 
+                className={selectedCategory === cat ? styles.active : ""}
+                >
+                {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                </Link>
+                
+                ))}
+            </div>
+            <CartWidget />
         </nav>
     );
 };
 
 export default NavBar;
+

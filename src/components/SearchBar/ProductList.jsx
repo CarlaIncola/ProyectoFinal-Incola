@@ -6,7 +6,6 @@ import allProducts from '../../data/products';
 const ProductList = ({ products = [] }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Filter products based on search term
   const filteredProducts = products.filter(product =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
   );

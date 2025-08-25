@@ -1,0 +1,52 @@
+@use '../styles/variables' as *;
+@use '../styles/base' as *;
+
+.itemCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    
+    &:hover {
+        transform: scale(1.03);
+        transition: all 0.2s ease;
+    }
+
+}
+
+.itemImage {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 8px 8px 0px 0px;
+}
+
+.itemName {
+    padding-left: 20px;
+    font-size: 20px;
+    margin-bottom: 0px;
+}
+
+.itemDescription {
+    color: blue;
+    border-style: solid;
+    padding-left: 20px;
+    margin-bottom: 0px;
+}
+
+.itemPrice {
+    padding-left: 20px;
+    
+}
+
+.addButton {
+    background-color: $main--red;
+    color: $main--white;
+    font-family: 'Afacad', sans-serif;
+    font-size: 16px;
+    padding: 8px 10px;
+    border: none;
+    border-radius: 0px 0px 8px 8px;
+}
