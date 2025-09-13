@@ -1,38 +1,30 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import ItemList from "./ItemList";
+
 import styles from "./itemListContainer.module.scss";
+import { useEffect, useState } from "react";
+import { products as productService } from "../services/products";
+import ItemList from "./ItemList";
 
-const ItemListContainer = ({ products, greeting }) => {
-    const { category } = useParams();
-    const [displayedProducts, setDisplayedProducts] = useState([]);
+const ItemListContainer = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        if (!products) return;
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await productService.getAll();
+        setProducts(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
 
-        const getProducts = new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(
-            category
-                ? products.filter((p) => p.category.includes(category))
-                : products
-            );
-        }, 500);
-        });
+  if (loading) return <p>Cargando productos...</p>;
 
-        getProducts.then((res) => setDisplayedProducts(res));
-    }, [category, products]);
-
-    if (!products) return <p>Loading products...</p>;
-
-    return (
-        <div className={styles.itemsListContainer}>
-        <h2 className={styles.greeting}>{greeting}</h2>
-        
-        <ItemList products={displayedProducts} />
-        </div>
-    );
+  return <ItemList products={products} />;
 };
 
 export default ItemListContainer;
-

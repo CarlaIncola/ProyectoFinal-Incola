@@ -1,36 +1,34 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
+import { products as productService } from "../services/products";
 import ItemDetail from "./ItemDetail";
-import products from "../data/products";
+import { CartContext } from "../context/CartContext";
 
 const ItemDetailContainer = () => {
-    const { id } = useParams();
-    const [product, setProduct] = useState(null);
-    const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+  const [isAdded, setIsAdded] = useState(false);
+  const { addToCart } = useContext(CartContext);
 
-    useEffect(() => {
-        const fetchProduct = new Promise((resolve, reject) => {
-        const item = products.find((p) => p.id === parseInt(id));
-        setTimeout(() => {
-            if (item) resolve(item);
-            else reject("Product not found");
-        }, 500);
-    });
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const allProducts = await productService.getAll();
+        const item = allProducts.find((p) => p.id === id);
+        setProduct(item);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchProduct();
+  }, [id]);
 
-        fetchProduct
-        .then((res) => setProduct(res))
-        .catch((err) => console.error(err))
-        .finally(() => setLoading(false));
-    }, [id]);
+  const handleAdd = (quantity) => {
+    addToCart({ ...product, quantity });
+    setIsAdded(true);
+  };
 
-    if (loading) return <p>Loading product...</p>;
-    if (!product) return <p>Product not found</p>;
-
-    return (
-        <div style={{ padding: "2rem" }}>
-        <ItemDetail product={product} />
-        </div>
-    );
+  return <ItemDetail product={product} onAdd={handleAdd} isAdded={isAdded} />;
 };
 
 export default ItemDetailContainer;
