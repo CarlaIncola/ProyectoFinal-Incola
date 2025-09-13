@@ -1,27 +1,29 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
-import Counter from "../Counter";
+
 
 const ProductCard = ({ product }) => {
-  const { addToCart } = useContext(CartContext);
-  const [quantity, setQuantity] = useState(1);
+  const { addToCart, removeFromCart, cart } = useContext(CartContext);
+
+  const inCart = cart.find((p) => p.id === product.id);
 
   return (
-    <div>
+    <div style={{ border: "1px solid #ccc", padding: "1rem", margin: "0.5rem" }}>
       <h3>{product.name}</h3>
-      <img src={product.image} alt={product.name} />
-      <p>${product.price}</p>
+      <p>Precio: ${product.price}</p>
+      <p>Categoría: {(product.category || []).join(", ")}</p>
 
-      <Counter
-        quantity={quantity}
-        onIncrement={() => setQuantity(q => q + 1)}
-        onDecrement={() => setQuantity(q => Math.max(q - 1, 1))}
-        onChange={val => setQuantity(Number(val))}
-      />
-
-      <button onClick={() => addToCart(product, quantity)}>Add to Cart</button>
+      {!inCart ? (
+        <button onClick={() => addToCart(product)}>Agregar al carrito</button>
+      ) : (
+        <>
+          <button onClick={() => removeFromCart(product.id)}>Remover del carrito</button>
+          <p>Cantidad: {inCart.quantity}</p>
+        </>
+      )}
     </div>
   );
 };
 
 export default ProductCard;
+

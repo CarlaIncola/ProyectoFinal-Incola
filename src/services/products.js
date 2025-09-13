@@ -1,47 +1,25 @@
 import { getDocs, collection } from "firebase/firestore";
-import { getDocs } from "firebase/firestore";
 import { db } from "../utils/firebase";
 
 const getAll = async () => {
-    try {
-      const querySnapshot = await getDocs(collection(db, "products"));
-  
-      const products = querySnapshot.docs.map((doc) => ({
+  try {
+    const ref = collection(db, "products");
+    const querySnapshot = await getDocs(ref);
+
+    const products = querySnapshot.docs.map((doc) => {
+      const data = doc.data();
+      return {
         id: doc.id,
-        ...doc.data(),
-      }));
-  
-      console.log("Productos desde Firebase:", products); // 👀 debug
-      return products;
-    } catch (error) {
-      console.error("Error al obtener productos:", error);
-      throw error;
-    }
-  };
-  
+        ...data,
+        category: Array.isArray(data.category) ? data.category : [data.category || "uncategorized"],
+      };
+    });
 
-const add = async (newProduct) => {
+    return products;
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    return [];
+  }
+};
 
-
-
-}
-
-const update = (value) => {
-
-
-
-}
-
-const getById = (id) => {
-
-
-    
-}
-
-const remove = (id) => {
-
-
-    
-}
-
-export const products = { getAll , getById , update, remove }
+export const products = { getAll };

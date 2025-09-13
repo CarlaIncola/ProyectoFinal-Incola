@@ -1,44 +1,29 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
-import styles from "./cartWidget.module.scss";
 
 const CartWidget = () => {
-    const { cart, removeFromCart } = useContext(CartContext);
-    const [isOpen, setIsOpen] = useState(false);
+  const { cart, increaseQuantity, decreaseQuantity, removeFromCart } =
+    useContext(CartContext);
 
-    const toggleCart = () => setIsOpen(!isOpen);
+  if (cart.length === 0) return <p>El carrito está vacío</p>;
 
-    const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
-
-    return (
-        <div className={styles.cartContainer}>
-        <button onClick={toggleCart} className={styles.cartButton}>
-            <i className="fa-solid fa-cart-shopping"></i>
-            {totalItems > 0 && <span className={styles.cartCount}>{totalItems}</span>}
-        </button>
-
-        {isOpen && (
-            <div className={styles.cartDropdown}>
-            {cart.length === 0 ? (
-                <p>Your cart is empty</p>
-            ) : (
-                cart.map((item) => (
-                <div key={item.id} className={styles.cartItem}>
-                    <span>{item.name}</span>
-                    <span>Qty: {item.quantity}</span>
-                    <button
-                    className={styles.removeBtn}
-                    onClick={() => removeFromCart(item.id)}
-                    >
-                    ❌
-                    </button>
-                </div>
-                ))
-            )}
-            </div>
-        )}
+  return (
+    <div>
+      <h2>Carrito</h2>
+      {cart.map((p) => (
+        <div key={p.id} style={{ borderBottom: "1px solid #ccc", marginBottom: "0.5rem" }}>
+          <h4>{p.name}</h4>
+          <p>Precio: ${p.price}</p>
+          <p>Cantidad: {p.quantity}</p>
+          <button onClick={() => increaseQuantity(p.id)}>+</button>
+          <button onClick={() => decreaseQuantity(p.id)}>-</button>
+          <button onClick={() => removeFromCart(p.id)}>Eliminar</button>
         </div>
-    );
+      ))}
+      <p>Total: ${cart.reduce((acc, p) => acc + p.price * p.quantity, 0)}</p>
+    </div>
+  );
 };
 
 export default CartWidget;
+

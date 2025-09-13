@@ -1,13 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import CartProvider from './components/cartWidget';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
+import { CartProvider } from "./context/CartContext";
 
-const rootDom = document.getElementById("root")
-const root = ReactDOM.createRoot(rootDom);
+const container = document.getElementById("root");
+const root = createRoot(container);
 
 root.render(
-  <React.StrictMode>
-      <App />
-  </React.StrictMode>
+  <CartProvider>
+    <App />
+  </CartProvider>
 );

@@ -1,38 +1,35 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import NavBar from "./components/NavBar";
-import ItemListContainer from "./pages/ItemListContainer";
-import HeroBanner from "./components/heroBanner";
-import { CartProvider } from "./context/CartContext";
+import { useEffect, useState } from "react";
+import { products as productService } from "./services/products";
 import FilterByCategory from "./components/Filters/FilterByCategory";
-import products from './data/products';
-import logoImage from './assets/images/logos/vurger-logo.png';
-import ItemDetailContainer from "./pages/ItemDetailContainer";
-
-const navLinks = [
-  { name: "All Products", path: "/" },
-  { name: "Burgers", path: "/category/burger" },
-  { name: "Salads", path: "/category/salad" },
-  { name: "Sandwiches", path: "/category/sandwiches" },
-];
+import CartWidget from "./components/cartWidget"
 
 function App() {
-  return (
-    <CartProvider>
-    <Router>
-      <NavBar logoImg={logoImage} products={products} />
-      <HeroBanner />
-        <Routes>
-          <Route path="/" element={<ItemListContainer products={products} greeting="Welcome!"/>} />
-          <Route path="/category/:category" element={<ItemListContainer products={products} />} />
-          <Route path="/product/:id" element={<ItemDetailContainer />} />
-        </Routes>
-    </Router>
-  </CartProvider>
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await productService.getAll();
+        setProducts(data);
+      } catch (error) {
+        console.error("Error al traer productos:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  if (loading) return <p>Cargando productos...</p>;
+
+  return (
+    <div className="App">
+      <h1>Mi Tienda</h1>
+      <FilterByCategory products={products} />
+      <CartWidget />
+    </div>
   );
 }
 
 export default App;
-
