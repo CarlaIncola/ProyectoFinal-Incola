@@ -9,7 +9,7 @@ import cakeIcon from "../../assets/images/icons/cake.png";
 import friesIcon from "../../assets/images/icons/fries.png";
 import saladIcon from "../../assets/images/icons/salad.png";
 // import sandwichIcon from "../../assets/images/icons/sandwich.png";
-// import cartIcon from "../../assets/images/icons/cart.png";
+import allIcon from "../../assets/images/icons/all.png";
 
 const NavBar = () => {
     const { cart } = useContext(CartContext);
@@ -23,8 +23,9 @@ const NavBar = () => {
   </div>
 
   <div className={styles.centerLinks}>
-    <Link className={styles.linkItem} to="/">
-      <span>Catálogo</span>
+  <Link className={styles.linkItem} to="/">
+      <img src={allIcon} alt="All" />
+      <span>All</span>
     </Link>
 
     <Link className={styles.linkItem} to="/category/burgers">
@@ -44,7 +45,7 @@ const NavBar = () => {
 
     <Link className={styles.linkItem} to="/category/accompaniments">
       <img src={friesIcon} alt="Accompaniments" />
-      <span>Accompaniments</span>
+      <span>Side dishes</span>
     </Link>
 
     <Link className={styles.linkItem} to="/category/coffee">

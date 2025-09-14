@@ -1,43 +1,41 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
 import { createOrder } from "../../services/orders";
+import { toast } from "react-toastify";
 
 const Checkout = () => {
-  const { cart, clearCart } = useContext(CartContext);
-  const [orderId, setOrderId] = useState(null);
+  const { cart } = useContext(CartContext);
 
-  if (cart.length === 0) return <p>No hay productos en el carrito</p>;
+  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  const total = cart.reduce((acc, p) => acc + p.price * p.quantity, 0);
-
-  const handleCheckout = async () => {
-    const order = { items: cart, total };
-    try {
-      const id = await createOrder(order);
-      setOrderId(id);
-      clearCart();
-    } catch (error) {
-      console.error(error);
-    }
+  const handleOrder = () => {
+    toast.success("Your order is on your way 🚀");
   };
 
   return (
-    <div>
+    <div style={{ padding: "20px" }}>
       <h2>Checkout</h2>
-      {cart.map((p) => (
-        <div key={p.id}>
-          <p>{p.name} x {p.quantity} = ${p.price * p.quantity}</p>
-        </div>
-      ))}
-      <p>Total: ${total}</p>
-      {orderId ? (
-        <p>✅ Compra finalizada! Tu ID de orden es: {orderId}</p>
+
+      {cart.length === 0 ? (
+        <p>Your cart is empty</p>
       ) : (
-        <button onClick={handleCheckout}>Finalizar compra</button>
+        <>
+          <ul>
+            {cart.map((item) => (
+              <li key={item.id}>
+                {item.name} ({item.quantity}) - $
+                {(item.price * item.quantity).toFixed(2)}
+              </li>
+            ))}
+          </ul>
+
+          <h3>Total: ${total.toFixed(2)}</h3>
+
+          <button onClick={handleOrder}>Order</button>
+        </>
       )}
     </div>
   );
 };
 
 export default Checkout;
-

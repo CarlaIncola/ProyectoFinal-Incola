@@ -32,6 +32,7 @@ const ItemDetail = ({ product, onAdd }) => {
       )}
         <h2>{product.name}</h2>
         <p>Precio: ${product.price}</p>
+        <p>Ingredients: {product.description}</p>
         <p>Categoría: {(product.category || []).join(", ")}</p>
   
         {product.stock === 0 ? (

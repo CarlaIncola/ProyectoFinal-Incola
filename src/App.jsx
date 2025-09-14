@@ -4,7 +4,9 @@ import HeroBanner from "./components/heroBanner/index";
 import ItemListContainer from "./pages/ItemListContainer";
 import ItemDetailContainer from "./pages/ItemDetailContainer";
 import CartWidget from "./components/cartWidget/index";
-import Checkout from "./components/cartWidget";
+import Checkout from "./components/cartWidget/checkout";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Layout() {
   const location = useLocation();
@@ -23,6 +25,7 @@ function Layout() {
         <Route path="/cart" element={<CartWidget />} />
         <Route path="/checkout" element={<Checkout />} />
       </Routes>
+      <ToastContainer position="top-center" autoClose={3000} />
     </>
   );
 }
