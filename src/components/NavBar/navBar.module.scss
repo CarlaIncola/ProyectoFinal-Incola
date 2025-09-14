@@ -1,5 +1,4 @@
 @use '../../styles/variables' as *;
-
 .navbar {
   max-width: 100%;
   display: flex;
@@ -13,38 +12,37 @@
   z-index: 100;
 
   .logo {
-    height: 20px;
+    height: 30px;
   }
 
   .links {
     display: flex;
-    gap: 1rem;
-    
+    gap: 1.5rem;
 
-    button {
-      background: none;
-      border: none;
-      font-size: 1rem;
+    .linkItem {
+      display: flex;
+      flex-direction: column;  // Icon on top, text below
+      align-items: center;
+      font-size: 0.9rem;
+      color: $main--black;
+      text-decoration: none;
       font-weight: 500;
-      cursor: pointer;
-      padding: 0.5rem 0.8rem;
-      border-radius: 4px;
-      transition: background 0.2s;
+
+      img {
+        width: 24px;
+        height: 24px;
+        margin-bottom: 0.2rem;
+      }
 
       &:hover {
-        background-color: #f0f0f0;
+        color: $main--red;
+      }
+
+      &.active {
+        text-decoration: underline;
+        color: $main--red;
+        font-weight: 700;
       }
     }
-
-    .active {
-      text-decoration: underline;
-      color: $main--red;
-      font-weight: 700;
-    }
   }
-}
-
-a {
-  color: $main--black;
-  text-decoration: none;
 }

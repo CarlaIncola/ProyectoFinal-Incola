@@ -1,24 +1,21 @@
-import { useState } from "react";
-
-const ItemCount = ({ stock, onAdd }) => {
-  const [count, setCount] = useState(1);
-
-  const increase = () => {
-    if (count < stock) setCount(count + 1);
+// src/components/ItemCount/index.jsx
+const ItemCount = ({ count, stock, increase, decrease, onAdd }) => {
+    return (
+      <div>
+        <button onClick={decrease} disabled={count <= 1}>
+          -
+        </button>
+        <span style={{ margin: "0 1rem" }}>{count}</span>
+        <button onClick={increase} disabled={count >= stock}>
+          +
+        </button>
+        <button onClick={onAdd} disabled={stock === 0}>
+          Add to cart
+        </button>
+      </div>
+    );
   };
-
-  const decrease = () => {
-    if (count > 1) setCount(count - 1);
-  };
-
-  return (
-    <div>
-      <button onClick={decrease}>-</button>
-      <span>{count}</span>
-      <button onClick={increase}>+</button>
-      <button onClick={() => onAdd(count)}>Add to cart</button>
-    </div>
-  );
-};
-
-export default ItemCount;
+  
+  export default ItemCount;
+  
+  

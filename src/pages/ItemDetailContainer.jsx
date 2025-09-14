@@ -7,7 +7,6 @@ import { CartContext } from "../context/CartContext";
 const ItemDetailContainer = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const [isAdded, setIsAdded] = useState(false);
   const { addToCart } = useContext(CartContext);
 
   useEffect(() => {
@@ -24,10 +23,13 @@ const ItemDetailContainer = () => {
   }, [id]);
 
   const handleAdd = (quantity) => {
-    addToCart({ ...product, quantity });
+    if (product) {
+      addToCart({ ...product, quantity });
+    }
   };
 
-  return <ItemDetail product={product} onAdd={handleAdd} isAdded={isAdded} />;
+  return <ItemDetail product={product} onAdd={handleAdd} />;
 };
 
 export default ItemDetailContainer;
+
