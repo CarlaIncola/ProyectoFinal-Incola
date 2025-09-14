@@ -1,8 +1,9 @@
 @use '../../styles/variables' as *;
 
-.productcard {
-    background-color: $main--white;
-    
+.productCard {
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.1);
+    border: none;
     border-radius: 8px;
 
     .addToCartBtn {
@@ -22,10 +23,21 @@
     }
 }
 
+.ProduCardLink {
+    text-decoration: none;
+    color: $main--black;
+}
+
 .productimage {
     width: 100%;
     height: auto;
     display: block;
     object-fit: cover;
     border-radius: 8px 8px 0px 0px;
+}
+
+
+.productImage {
+    width: 200px !important;
+    height: 200px !important;
 }

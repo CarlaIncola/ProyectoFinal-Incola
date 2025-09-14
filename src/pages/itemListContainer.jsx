@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { products as productService } from "../services/products";
 import ItemList from "./ItemList";
+import styles from "./itemListContainer.module.scss";
 
 const ItemListContainer = () => {
   const { category } = useParams();

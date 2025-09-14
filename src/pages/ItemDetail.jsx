@@ -22,6 +22,14 @@ const ItemDetail = ({ product, onAdd }) => {
   
     return (
       <div style={{ border: "1px solid #ccc", padding: "1rem" }}>
+        {/* Product Image */}
+      {product.image && (
+        <img 
+          src={product.image}
+          alt={product.name}
+          className={styles.productImage}
+        />
+      )}
         <h2>{product.name}</h2>
         <p>Precio: ${product.price}</p>
         <p>Categoría: {(product.category || []).join(", ")}</p>

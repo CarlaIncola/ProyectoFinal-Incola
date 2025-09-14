@@ -1,21 +1,32 @@
 @use '../styles/variables' as *;
 @use '../styles/base' as *;
 
-.itemsListContainer {
+.itemListContainer {
     display: grid;
-    grid-template-columns: repeat(1, 6fr);
-    flex-wrap: wrap;
-    justify-content: space-around;
+    grid-template-columns: repeat(2, 1fr); // default: mobile (2 columns)
     gap: 20px;
-    background-color: $main--white;
+    background-color: blue;
     color: $main--black;
     padding-top: 40px;
-}
-
-
-
-.greeting {
+    justify-items: center; // center items in each cell
+  }
+  
+  // Tablet
+  @media (min-width: 768px) {
+    .itemListContainer {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  // Desktop
+  @media (min-width: 1200px) {
+    .itemListContainer {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+  
+  .greeting {
     text-align: center;
     font-size: 24px !important;
-}
-
+  }
+  
