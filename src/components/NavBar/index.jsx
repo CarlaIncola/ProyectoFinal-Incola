@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import styles from "./navBar.module.scss";
 import logo from "../../assets/images/logos/vurger-logo.png";
-
+import { useContext } from "react";
+import { CartContext } from "../../context/CartContext";
 // Import category icons
 import burgerIcon from "../../assets/images/icons/burger.png";
 // import saladIcon from "../../assets/images/icons/salad.png";
@@ -9,6 +10,8 @@ import burgerIcon from "../../assets/images/icons/burger.png";
 // import cartIcon from "../../assets/images/icons/cart.png";
 
 const NavBar = () => {
+    const { cart } = useContext(CartContext);
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   return (
     <nav className={styles.navbar}>
       <Link to="/">
@@ -35,8 +38,11 @@ const NavBar = () => {
           <span>Sandwiches</span>
         </Link>
 
-        <Link className={styles.linkItem} to="/cart">
+        <Link className={styles.linkItem} to="/cart" style={{ position: "relative" }}>
           <img src={burgerIcon} alt="Carrito" />
+          {totalItems > 0 && (
+            <span className={styles.cartBadge}>{totalItems}</span>
+          )}
           <span>Carrito</span>
         </Link>
 

@@ -6,42 +6,42 @@ import ItemCount from "../components/ItemCount";
 
 
 const ItemDetail = ({ product, onAdd }) => {
-  const [count, setCount] = useState(1);
-
-  if (!product) return <p>Cargando producto...</p>;
-
-  const increase = () => {
-    if (count < product.stock) {
-      setCount((prev) => prev + 1);
-    }
+    const [count, setCount] = useState(1);
+    const [isAdded, setIsAdded] = useState(false);
+  
+    if (!product) return <p>Cargando producto...</p>;
+  
+    const increase = () => count < product.stock && setCount(count + 1);
+    const decrease = () => count > 1 && setCount(count - 1);
+  
+    const handleAddClick = () => {
+      onAdd(count);
+      setIsAdded(true);
+      setCount(1);
+    };
+  
+    return (
+      <div style={{ border: "1px solid #ccc", padding: "1rem" }}>
+        <h2>{product.name}</h2>
+        <p>Precio: ${product.price}</p>
+        <p>Categoría: {(product.category || []).join(", ")}</p>
+  
+        {product.stock === 0 ? (
+          <p>❌ Producto sin stock</p>
+        ) : !isAdded ? (
+          <ItemCount
+            count={count}
+            stock={product.stock}
+            increase={increase}
+            decrease={decrease}
+            onAdd={handleAddClick}
+          />
+        ) : (
+          <p>✅ Producto agregado al carrito</p>
+        )}
+      </div>
+    );
   };
-
-  const decrease = () => {
-    if (count > 1) {
-      setCount((prev) => prev - 1);
-    }
-  };
-
-  const handleAddClick = () => {
-    onAdd(count); // ✅ send the selected count to ItemDetailContainer
-    setCount(1);  // (optional) reset to 1 after adding
-  };
-
-  return (
-    <div style={{ border: "1px solid #ccc", padding: "1rem" }}>
-      <h2>{product.name}</h2>
-      <p>Precio: ${product.price}</p>
-      <p>Categoría: {(product.category || []).join(", ")}</p>
-
-      <ItemCount
-        count={count}
-        stock={product.stock}
-        increase={increase}
-        decrease={decrease}
-        onAdd={handleAddClick} // ✅ call our wrapper instead of directly onAdd
-      />
-    </div>
-  );
-};
+  
 
 export default ItemDetail;
