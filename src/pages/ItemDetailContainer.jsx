@@ -25,7 +25,6 @@ const ItemDetailContainer = () => {
 
   const handleAdd = (quantity) => {
     addToCart({ ...product, quantity });
-    setIsAdded(true);
   };
 
   return <ItemDetail product={product} onAdd={handleAdd} isAdded={isAdded} />;

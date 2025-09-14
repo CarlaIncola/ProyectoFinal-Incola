@@ -1,5 +1,8 @@
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
+import { Link } from "react-router-dom";
+
+
 
 const CartWidget = () => {
   const { cart, increaseQuantity, decreaseQuantity, removeFromCart } =
@@ -21,6 +24,9 @@ const CartWidget = () => {
         </div>
       ))}
       <p>Total: ${cart.reduce((acc, p) => acc + p.price * p.quantity, 0)}</p>
+    <Link to="/checkout">
+  <button>Ir a Checkout</button>
+</Link>
     </div>
   );
 };

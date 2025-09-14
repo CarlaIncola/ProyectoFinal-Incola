@@ -1,29 +1,22 @@
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
 
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
-  const { addToCart, removeFromCart, cart } = useContext(CartContext);
-
-  const inCart = cart.find((p) => p.id === product.id);
-
   return (
     <div style={{ border: "1px solid #ccc", padding: "1rem", margin: "0.5rem" }}>
-      <h3>{product.name}</h3>
-      <p>Precio: ${product.price}</p>
-      <p>Categoría: {(product.category || []).join(", ")}</p>
-
-      {!inCart ? (
-        <button onClick={() => addToCart(product)}>Agregar al carrito</button>
-      ) : (
-        <>
-          <button onClick={() => removeFromCart(product.id)}>Remover del carrito</button>
-          <p>Cantidad: {inCart.quantity}</p>
-        </>
-      )}
+      <Link to={`/product/${product.id}`}>
+      <img 
+          src={product.image} 
+          alt={product.name} 
+          style={{ width: "100%", height: "150px", objectFit: "cover", marginBottom: "0.5rem" }}
+        />
+        <h3>{product.name}</h3>
+        <p>Precio: ${product.price}</p>
+      </Link>
     </div>
   );
 };
 
 export default ProductCard;
-

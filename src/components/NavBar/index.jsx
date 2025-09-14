@@ -1,45 +1,26 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import CartWidget from "../cartWidget";
+import { Link } from "react-router-dom";
 import styles from "./navBar.module.scss";
+import logo from "../../assets/images/logos/vurger-logo.png"
 
-const NavBar = ({ logoImg, products }) => {
-    const [selectedCategory, setSelectedCategory] = useState("all");
-    const navigate = useNavigate();
-
-    const categories = ["all", ...new Set(products.flatMap(p => p.category))];
-
-    const handleCategoryClick = (category) => {
-        setSelectedCategory(category);
-        if (category === "all") {
-        navigate("/");
-        } else {
-        navigate(`/category/${category}`);
-        }
-    };
-
+const NavBar = () => {
     return (
-        <nav className={styles.navbar}>
-            <div className={styles.logo}>
-                <img src={logoImg} alt="Logo" />
-            </div>
-
-            <div className={styles.categories}>
-                {categories.map((cat, index) => (
-                <Link 
-                key={index} 
-                to={cat === "all" ? "/" : `/category/${cat}`} 
-                className={selectedCategory === cat ? styles.active : ""}
-                >
-                {cat.charAt(0).toUpperCase() + cat.slice(1)}
-                </Link>
-                
-                ))}
-            </div>
-            <CartWidget />
-        </nav>
+      <nav className={styles.navbar}>
+        <Link to="/">
+          <img src={logo} alt="Vurger Logo" className={styles.logo} />
+        </Link>
+  
+        {/* Navigation links */}
+        <div className={styles.links}>
+          <Link to="/">Catálogo</Link>
+          <Link to="/category/burgers">Hamburguesas</Link>
+          <Link to="/category/salads">Ensaladas</Link>
+          <Link to="/category/sandwiches">Sandwiches</Link>
+          <Link to="/cart">Carrito</Link>
+          <Link to="/checkout">Checkout</Link>
+        </div>
+      </nav>
     );
-};
-
-export default NavBar;
-
+  };
+  
+  export default NavBar;
+  
