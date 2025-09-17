@@ -1,9 +1,10 @@
 import Item from "./Item";
 import ProductCard from "../components/ProductCard/ProductCard";
+import styles from "./itemList.module.scss";
 
 const ItemList = ({ products }) => {
   return (
-    <div style={{ display: "flex", flexWrap: "wrap" }}>
+    <div className={styles.itemList} style={{ display: "flex", flexWrap: "wrap" }}>
       {products.map((product) => (
         <ProductCard key={product.id} product={product} />
       ))}

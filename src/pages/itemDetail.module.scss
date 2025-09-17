@@ -1,5 +1,18 @@
 @use '../styles/variables' as *;
 
+.detailContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  margin-top: 40px;
+  margin-left: 15%;
+  margin-right: 15%;
+  border-radius: 8px;
+  box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.1);
+  border: none !important;
+}
 .detailCard {
     display: flex;
     flex-direction: column;
@@ -54,6 +67,7 @@
   
   .detailImage {
     max-width: 100%;
+    align-self: center;
     width: 400px;
     height: auto;
     border-radius: 8px;
@@ -61,5 +75,5 @@
   
  
   .productImage {
-    width: 400px;
+    width: 200px;
   }

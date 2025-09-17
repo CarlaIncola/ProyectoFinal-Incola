@@ -5,7 +5,6 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr); // default: mobile (2 columns)
     gap: 20px;
-    background-color: blue;
     color: $main--black;
     padding-top: 40px;
     justify-items: center; // center items in each cell

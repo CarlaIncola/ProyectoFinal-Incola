@@ -8,7 +8,7 @@ import burgerIcon from "../../assets/images/icons/burger1.png";
 import cakeIcon from "../../assets/images/icons/cake.png";
 import friesIcon from "../../assets/images/icons/fries.png";
 import saladIcon from "../../assets/images/icons/salad.png";
-// import sandwichIcon from "../../assets/images/icons/sandwich.png";
+import drinksIcon from "../../assets/images/icons/drinks.png";
 import allIcon from "../../assets/images/icons/all.png";
 
 const NavBar = () => {
@@ -51,6 +51,11 @@ const NavBar = () => {
     <Link className={styles.linkItem} to="/category/coffee">
       <img src={cakeIcon} alt="Coffee" />
       <span>Coffee</span>
+    </Link>
+
+    <Link className={styles.linkItem} to="/category/drinks">
+      <img src={drinksIcon} alt="Drinks" />
+      <span>Drinks</span>
     </Link>
   </div>
 

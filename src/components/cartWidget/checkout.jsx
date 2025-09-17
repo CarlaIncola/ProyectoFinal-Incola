@@ -1,37 +1,59 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
 import { createOrder } from "../../services/orders";
-import { toast } from "react-toastify";
 
 const Checkout = () => {
-  const { cart } = useContext(CartContext);
+  const { cart, clearCart } = useContext(CartContext);
+  const [orderPlaced, setOrderPlaced] = useState(false);
 
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  if (cart.length === 0 && !orderPlaced) return <p>No hay productos en el carrito</p>;
+
+  const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   const handleOrder = () => {
-    toast.success("Your order is on your way 🚀");
+    setOrderPlaced(true);
+    clearCart(); // optional: empty cart after order
   };
-
+  
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ maxWidth: "600px", margin: "2rem auto", padding: "1rem", border: "1px solid #ccc", borderRadius: "8px" }}>
       <h2>Checkout</h2>
 
-      {cart.length === 0 ? (
-        <p>Your cart is empty</p>
+      {orderPlaced ? (
+        <p style={{ fontSize: "1.2rem", color: "green" }}>
+          🎉 Your order is on its way!
+        </p>
       ) : (
         <>
-          <ul>
+          <ul style={{ listStyle: "none", padding: 0 }}>
             {cart.map((item) => (
-              <li key={item.id}>
-                {item.name} ({item.quantity}) - $
-                {(item.price * item.quantity).toFixed(2)}
+              <li key={item.id} style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
+                <span>{item.name} x {item.quantity}</span>
+                <span>${item.price * item.quantity}</span>
               </li>
             ))}
           </ul>
 
-          <h3>Total: ${total.toFixed(2)}</h3>
+          <hr />
+          <p style={{ fontWeight: "bold", fontSize: "1.1rem", textAlign: "right" }}>
+            Total: ${total.toFixed(2)}
+          </p>
 
-          <button onClick={handleOrder}>Order</button>
+          <button 
+            onClick={handleOrder} 
+            style={{
+              marginTop: "1rem",
+              padding: "10px 20px",
+              backgroundColor: "#ff4d4d",
+              color: "#fff",
+              border: "none",
+              borderRadius: "6px",
+              cursor: "pointer",
+              fontSize: "1rem"
+            }}
+          >
+            Order
+          </button>
         </>
       )}
     </div>
