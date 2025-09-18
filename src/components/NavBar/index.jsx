@@ -18,7 +18,7 @@ const NavBar = () => {
 
   return (
     <nav className={styles.navbar}>
-      
+
       <div className={styles.left}>
         <NavLink to="/" className={styles.brand}>
           <img src={logo} alt="Vurger Logo" className={styles.logo} />
@@ -27,7 +27,7 @@ const NavBar = () => {
 
       <div className={styles.centerLinks}>
         <NavLink to="/" className={({ isActive }) => navClass(isActive)}>
-        <img src={allIcon} alt="All products" />
+          <img src={allIcon} alt="All" />
           <span>All</span>
         </NavLink>
 
@@ -40,7 +40,7 @@ const NavBar = () => {
           <img src={saladIcon} alt="Salads" />
           <span>Salads</span>
         </NavLink>
-
+        
         <NavLink to="/category/accompaniments" className={({ isActive }) => navClass(isActive)}>
           <img src={friesIcon} alt="Accompaniments" />
           <span>Side dishes</span>
@@ -58,18 +58,18 @@ const NavBar = () => {
       </div>
 
       <div className={styles.right}>
-        <NavLink to="/cart" className={({ isActive }) => navClass(isActive)} style={{ position: "relative" }}>
-          {totalItems > 0 && (
-            <span className={styles.cartBadge}>{totalItems}</span>
-          )}
-          <i class="fa-solid fa-cart-shopping"></i>
+        <NavLink to="/cart">
+          <span className={styles.cartWrapper} aria-hidden>
+            <i className="fa-solid fa-cart-shopping" />
+            {totalItems > 0 && <span className={styles.cartBadge}>{totalItems}</span>}
+          </span>
         </NavLink>
 
         <NavLink to="/checkout" className={({ isActive }) => navClass(isActive)}>
           <span>Checkout</span>
         </NavLink>
       </div>
-    
+
     </nav>
   );
 };

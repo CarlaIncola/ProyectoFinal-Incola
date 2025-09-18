@@ -9,7 +9,7 @@ const ItemDetail = ({ product, onAdd }) => {
     const [count, setCount] = useState(1);
     const [isAdded, setIsAdded] = useState(false);
   
-    if (!product) return <p>Cargando producto...</p>;
+    if (!product) return <p>Loading product...</p>;
   
     const increase = () => count < product.stock && setCount(count + 1);
     const decrease = () => count > 1 && setCount(count - 1);
@@ -30,9 +30,8 @@ const ItemDetail = ({ product, onAdd }) => {
           />
         )}
           <h2 className={styles.detailName}>{product.name}</h2>
-          <p className={styles.detailPrice}>Precio: ${product.price}</p>
-          <p className={styles.detailDescription}>Ingredients: {product.description}</p>
-          <p className={styles.detailCategory}>Categoría: {(product.category || []).join(", ")}</p>
+          <p className={styles.detailPrice}>Price: ${product.price}</p>
+          <p className={styles.detailDescription}><strong>Product detail:</strong> {product.description}</p>
     
           {product.stock === 0 ? (
             <p>❌ Out of stock</p>
@@ -45,7 +44,7 @@ const ItemDetail = ({ product, onAdd }) => {
               onAdd={handleAddClick}
             />
           ) : (
-            <p>✅ Producto agregado al carrito</p>
+            <p>✅ Product added to cart</p>
           )}
       </div>
     );

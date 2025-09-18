@@ -1,18 +1,19 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../../context/CartContext";
+import styles from "./cartWidget.module.scss";
 import { createOrder } from "../../services/orders";
 
 const Checkout = () => {
   const { cart, clearCart } = useContext(CartContext);
   const [orderPlaced, setOrderPlaced] = useState(false);
 
-  if (cart.length === 0 && !orderPlaced) return <p>No hay productos en el carrito</p>;
+  if (cart.length === 0 && !orderPlaced) return <p>You didn't add any product to the cart.</p>;
 
   const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   const handleOrder = () => {
     setOrderPlaced(true);
-    clearCart(); // optional: empty cart after order
+    clearCart();
   };
   
   return (
@@ -41,16 +42,7 @@ const Checkout = () => {
 
           <button 
             onClick={handleOrder} 
-            style={{
-              marginTop: "1rem",
-              padding: "10px 20px",
-              backgroundColor: "#ff4d4d",
-              color: "#fff",
-              border: "none",
-              borderRadius: "6px",
-              cursor: "pointer",
-              fontSize: "1rem"
-            }}
+            className={StyleSheet.orderButton}
           >
             Order
           </button>

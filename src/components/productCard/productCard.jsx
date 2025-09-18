@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => {
           style={{ width: "100%", height: "150px", objectFit: "cover", marginBottom: "0.5rem" }}
         />
         <h3 className={styles.productName}>{product.name}</h3>
-        <p>Precio: ${product.price}</p>
+        <p>Price: ${product.price}</p>
       </Link>
     </div>
   );
