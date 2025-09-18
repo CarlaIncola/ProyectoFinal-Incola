@@ -1,4 +1,3 @@
-// src/context/CartContext.js
 import { createContext, useState } from "react";
 
 export const CartContext = createContext();
@@ -6,50 +5,54 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
-  const addToCart = (product) => {
+  const addItem = (item) => {
     setCart((prevCart) => {
-      const existingItemIndex = prevCart.findIndex((item) => item.id === product.id);
-
-      if (existingItemIndex !== -1) {
-        // ✅ sum quantities
-        const updatedCart = [...prevCart];
-        updatedCart[existingItemIndex].quantity += product.quantity;
-        return updatedCart;
+      const existing = prevCart.find((i) => i.id === item.id);
+      if (existing) {
+        return prevCart.map((i) =>
+          i.id === item.id ? { ...i, quantity: i.quantity + item.quantity } : i
+        );
+      } else {
+        return [...prevCart, item];
       }
-
-      return [...prevCart, product];
     });
   };
 
-  const removeFromCart = (id) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+  const removeItem = (id) => {
+    setCart((prevCart) => prevCart.filter((i) => i.id !== id));
   };
 
+  const clearCart = () => setCart([]);
+
+  // ✅ New functions to increase/decrease quantity
   const increaseQuantity = (id) => {
     setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+      prevCart.map((i) =>
+        i.id === id ? { ...i, quantity: i.quantity + 1 } : i
       )
     );
   };
 
   const decreaseQuantity = (id) => {
     setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === id && item.quantity > 1
-          ? { ...item, quantity: item.quantity - 1 }
-          : item
+      prevCart.map((i) =>
+        i.id === id
+          ? { ...i, quantity: i.quantity > 1 ? i.quantity - 1 : 1 }
+          : i
       )
     );
   };
 
-  const clearCart = () => {
-    setCart([]);
-  };
-
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart }}
+      value={{
+        cart,
+        addItem,
+        removeItem,
+        clearCart,
+        increaseQuantity, // ✅ expose them here
+        decreaseQuantity, // ✅ expose them here
+      }}
     >
       {children}
     </CartContext.Provider>

@@ -1,21 +1,15 @@
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
-import styles from "./productCard.module.scss";
-
 import { Link } from "react-router-dom";
+import styles from "./productCard.module.scss";
 
 const ProductCard = ({ product }) => {
   return (
-    <div className={styles.productCard} style={{ border: "1px solid #ccc", padding: "1rem", margin: "0.5rem" }}>
-      <Link className={styles.ProduCardLink} to={`/product/${product.id}`}>
-      <img 
-          className={styles.productImage}
-          src={product.image} 
-          alt={product.name} 
-          style={{ width: "100%", height: "150px", objectFit: "cover", marginBottom: "0.5rem" }}
-        />
+    <div className={styles.productCard}>
+      <Link to={`/product/${product.id}`} className={styles.productCardLink}>
+        <img src={product.image} alt={product.name} className={styles.productImage} />
         <h3 className={styles.productName}>{product.name}</h3>
-        <p>Price: ${product.price}</p>
+        <p className={styles.productPrice}>${product.price}</p>
       </Link>
     </div>
   );

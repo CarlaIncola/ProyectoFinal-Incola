@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import styles from "./cartWidget.module.scss";
 
 const CartWidget = () => {
-  const { cart, increaseQuantity, decreaseQuantity, removeFromCart } =
+  const { cart, increaseQuantity, decreaseQuantity, removeItem } =
     useContext(CartContext);
 
   if (cart.length === 0) return <p>Your cart is empty.</p>;
@@ -34,7 +34,7 @@ const CartWidget = () => {
             <span className={styles.numberCount}>{p.quantity}</span>
             <button className={`${styles.counterButton} ${styles.handlerRight}`} onClick={() => decreaseQuantity(p.id)}>-</button>
           </div>
-          <button className={styles.removeFromCart} onClick={() => removeFromCart(p.id)}>Remove</button>
+          <button className={styles.removeFromCart} onClick={() => removeItem(p.id)}>Remove</button>
         </div>
       ))}
       <p>Total: ${total.toFixed(2)}</p>

@@ -1,4 +1,4 @@
-import { getDocs, collection } from "firebase/firestore";
+import { doc, getDoc, getDocs, collection } from "firebase/firestore";
 import { db } from "../utils/firebase";
 
 const getAll = async () => {
@@ -22,4 +22,17 @@ const getAll = async () => {
   }
 };
 
-export const products = { getAll };
+const getById = async (id) => {
+  try {
+    const docRef = doc(db, "products", id);
+    const snap = await getDoc(docRef);
+    if (!snap.exists()) return null;
+    const data = snap.data();
+    return { id: snap.id, ...data, category: Array.isArray(data.category) ? data.category : [data.category || "uncategorized"] };
+  } catch (err) {
+    console.error("Error getById:", err);
+    return null;
+  }
+};
+
+export const products = { getAll, getById };
