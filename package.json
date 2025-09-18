@@ -1,6 +1,5 @@
 {
   "name": "ecommerce",
-  "homepage": "https://carlaincola.github.io/CreaTuLanding-Incola",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -1,9 +1,8 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styles from "./navBar.module.scss";
 import logo from "../../assets/images/logos/vurger-logo.png";
 import { useContext } from "react";
 import { CartContext } from "../../context/CartContext";
-// Import category icons
 import burgerIcon from "../../assets/images/icons/burger1.png";
 import cakeIcon from "../../assets/images/icons/cake.png";
 import friesIcon from "../../assets/images/icons/fries.png";
@@ -12,68 +11,67 @@ import drinksIcon from "../../assets/images/icons/drinks.png";
 import allIcon from "../../assets/images/icons/all.png";
 
 const NavBar = () => {
-    const { cart } = useContext(CartContext);
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const { cart } = useContext(CartContext);
+  const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 0), 0);
+
+  const navClass = (isActive) => `${styles.linkItem} ${isActive ? styles.active : ""}`;
+
   return (
     <nav className={styles.navbar}>
-  <div className={styles.left}>
-    <Link to="/">
-      <img src={logo} alt="Vurger Logo" className={styles.logo} />
-    </Link>
-  </div>
+      
+      <div className={styles.left}>
+        <NavLink to="/" className={styles.brand}>
+          <img src={logo} alt="Vurger Logo" className={styles.logo} />
+        </NavLink>
+      </div>
 
-  <div className={styles.centerLinks}>
-  <Link className={styles.linkItem} to="/">
-      <img src={allIcon} alt="All" />
-      <span>All</span>
-    </Link>
+      <div className={styles.centerLinks}>
+        <NavLink to="/" className={({ isActive }) => navClass(isActive)}>
+        <img src={allIcon} alt="All products" />
+          <span>All</span>
+        </NavLink>
 
-    <Link className={styles.linkItem} to="/category/burgers">
-      <img src={burgerIcon} alt="Burgers" />
-      <span>Burgers</span>
-    </Link>
+        <NavLink to="/category/burgers" className={({ isActive }) => navClass(isActive)}>
+          <img src={burgerIcon} alt="Burgers" />
+          <span>Burgers</span>
+        </NavLink>
 
-    <Link className={styles.linkItem} to="/category/salads">
-      <img src={saladIcon} alt="Salads" />
-      <span>Salads</span>
-    </Link>
+        <NavLink to="/category/salads" className={({ isActive }) => navClass(isActive)}>
+          <img src={saladIcon} alt="Salads" />
+          <span>Salads</span>
+        </NavLink>
 
-    <Link className={styles.linkItem} to="/category/sandwiches">
-      <img src={burgerIcon} alt="Sandwiches" />
-      <span>Sandwiches</span>
-    </Link>
+        <NavLink to="/category/accompaniments" className={({ isActive }) => navClass(isActive)}>
+          <img src={friesIcon} alt="Accompaniments" />
+          <span>Side dishes</span>
+        </NavLink>
 
-    <Link className={styles.linkItem} to="/category/accompaniments">
-      <img src={friesIcon} alt="Accompaniments" />
-      <span>Side dishes</span>
-    </Link>
+        <NavLink to="/category/coffee" className={({ isActive }) => navClass(isActive)}>
+          <img src={cakeIcon} alt="Coffee" />
+          <span>Coffee</span>
+        </NavLink>
 
-    <Link className={styles.linkItem} to="/category/coffee">
-      <img src={cakeIcon} alt="Coffee" />
-      <span>Coffee</span>
-    </Link>
+        <NavLink to="/category/drinks" className={({ isActive }) => navClass(isActive)}>
+          <img src={drinksIcon} alt="Drinks" />
+          <span>Drinks</span>
+        </NavLink>
+      </div>
 
-    <Link className={styles.linkItem} to="/category/drinks">
-      <img src={drinksIcon} alt="Drinks" />
-      <span>Drinks</span>
-    </Link>
-  </div>
+      <div className={styles.right}>
+        <NavLink to="/cart" className={({ isActive }) => navClass(isActive)} style={{ position: "relative" }}>
+          {totalItems > 0 && (
+            <span className={styles.cartBadge}>{totalItems}</span>
+          )}
+          <i class="fa-solid fa-cart-shopping"></i>
+        </NavLink>
 
-  <div className={styles.right}>
-    <Link className={styles.linkItem} to="/cart" style={{ position: "relative" }}>
-      {totalItems > 0 && <span className={styles.cartBadge}>{totalItems}</span>}
-      <span><i class="fa-solid fa-cart-shopping"></i></span>
-    </Link>
-
-    <Link className={styles.linkItem} to="/checkout">
-      <span>Checkout</span>
-    </Link>
-  </div>
-</nav>
-
+        <NavLink to="/checkout" className={({ isActive }) => navClass(isActive)}>
+          <span>Checkout</span>
+        </NavLink>
+      </div>
+    
+    </nav>
   );
 };
 
 export default NavBar;
-
-  

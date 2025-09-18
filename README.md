@@ -1,24 +1,22 @@
-# Proyecto Final - Vurger E-Commerce
+# Proyecto Final - Vurger (React + Firebase)
 
 ## Descripción
-E-commerce de comida rápida realizado con React, React Router, Context y Firebase (Firestore).
+E-commerce de ejemplo con React, React Router, Context API y Firebase Firestore.
 
 ## Funcionalidades
-- Listado dinámico de productos por categoría.
-- Detalle de productos con selección de cantidad.
-- Carrito de compras con acumulación de cantidades.
-- Checkout que genera orden en Firestore.
-- Navegación SPA con NavBar y HeroBanner.
+- Listado de productos y filtro por categorías.
+- Vista detalle con selección de cantidad (ItemCount).
+- Carrito global (Context) con acumulación de cantidades.
+- Checkout que genera orden (Firestore).
+- Navegación SPA con NavBar y NavLink.
 
-## Tecnologías
-- React
-- React Router
-- Context API
-- Firebase Firestore
-- SCSS
+## Quick start
+1. `npm install`
+2. Crear `.env` con configuración de Firebase (o usar `src/utils/firebase.js`)
+3. `npm start`
 
-## Estructura de Carpetas
-- `src/components` → Componentes reutilizables
-- `src/pages` → Contenedores de vistas
-- `src/context` → Context del carrito
-- `src/services` → Conexión con Firestore
+## Estructura
+- `src/components` — componentes UI (NavBar, ProductCard, CartWidget, etc.)
+- `src/pages` — contenedores / páginas (ItemListContainer, ItemDetailContainer, Checkout)
+- `src/context` — CartContext
+- `src/services` — servicios para Firestore

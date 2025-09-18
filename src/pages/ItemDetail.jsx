@@ -22,32 +22,31 @@ const ItemDetail = ({ product, onAdd }) => {
   
     return (
       <div className={styles.detailContainer} style={{ border: "1px solid #ccc", padding: "1rem" }}>
-        {/* Product Image */}
-      {product.image && (
-        <img 
-          src={product.image}
-          alt={product.name}
-          className={styles.productImage}
-        />
-      )}
-        <h2 className={styles.detailName}>{product.name}</h2>
-        <p className={styles.detailPrice}>Precio: ${product.price}</p>
-        <p className={styles.detailDescription}>Ingredients: {product.description}</p>
-        <p className={styles.detailCategory}>Categoría: {(product.category || []).join(", ")}</p>
-  
-        {product.stock === 0 ? (
-          <p>❌ Out of stock</p>
-        ) : !isAdded ? (
-          <ItemCount
-            count={count}
-            stock={product.stock}
-            increase={increase}
-            decrease={decrease}
-            onAdd={handleAddClick}
+        {product.image && (
+          <img 
+            src={product.image}
+            alt={product.name}
+            className={styles.productImage}
           />
-        ) : (
-          <p>✅ Producto agregado al carrito</p>
         )}
+          <h2 className={styles.detailName}>{product.name}</h2>
+          <p className={styles.detailPrice}>Precio: ${product.price}</p>
+          <p className={styles.detailDescription}>Ingredients: {product.description}</p>
+          <p className={styles.detailCategory}>Categoría: {(product.category || []).join(", ")}</p>
+    
+          {product.stock === 0 ? (
+            <p>❌ Out of stock</p>
+          ) : !isAdded ? (
+            <ItemCount
+              count={count}
+              stock={product.stock}
+              increase={increase}
+              decrease={decrease}
+              onAdd={handleAddClick}
+            />
+          ) : (
+            <p>✅ Producto agregado al carrito</p>
+          )}
       </div>
     );
   };

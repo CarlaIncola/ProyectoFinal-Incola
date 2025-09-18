@@ -1,15 +1,16 @@
-// src/components/ItemCount/index.jsx
+import styles from "./itemCount.module.scss";
+
 const ItemCount = ({ count, stock, increase, decrease, onAdd }) => {
     return (
-      <div>
-        <button onClick={decrease} disabled={count <= 1}>
+      <div className={styles.addToCartContainer} >
+        <button className={`${styles.amountHandler} ${styles.handlerLeft}`} onClick={decrease} disabled={count <= 1}>
           -
         </button>
-        <span style={{ margin: "0 1rem" }}>{count}</span>
-        <button onClick={increase} disabled={count >= stock}>
+        <span className={styles.numberCount}>{count}</span>
+        <button className={`${styles.amountHandler} ${styles.handlerRight}`} onClick={increase} disabled={count >= stock}>
           +
         </button>
-        <button onClick={onAdd} disabled={stock === 0}>
+        <button className={styles.addToCart} onClick={onAdd} disabled={stock === 0}>
           Add to cart
         </button>
       </div>

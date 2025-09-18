@@ -2,7 +2,7 @@
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between; // space between left, center, right
+  justify-content: space-between;
   padding: 0.8rem 2rem;
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -21,11 +21,13 @@
 
   .centerLinks {
     display: flex;
-    gap: 2.5rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
     flex-grow: 1;
-    justify-content: center; // center the links
+    justify-content: center;
     align-items: center;
-
+    text-align: center;
+  
     .linkItem {
       display: flex;
       flex-direction: column;
@@ -34,17 +36,19 @@
       color: $main--black;
       text-decoration: none;
       font-weight: 500;
-
+      min-width: 60px;
+      margin-bottom: 0.5rem;
+  
       img {
         width: 24px;
         height: 24px;
         margin-bottom: 0.2rem;
       }
-
+  
       &:hover {
         color: $main--red;
       }
-
+  
       &.active {
         text-decoration: underline;
         color: $main--red;
@@ -52,11 +56,13 @@
       }
     }
   }
+  
 
   .right {
     display: flex;
     gap: 1rem;
     align-items: center;
+    
     img {
       width: 24px;
       height: 24px;
